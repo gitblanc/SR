@@ -31,13 +31,13 @@ void setup()
 
 void loop()
 {
-  // Número random entre 1 y 3
-  randomNum = random(1,4);
   valorPulsador = digitalRead(pinPulsador);
   if (valorPulsador == HIGH && pushed == 0) {
     // Si detecta que pulsamos el pulsador imprime por el monitor serie "pulsado".
     // se ha pulsado
     pushed = 1;
+    // Número random entre 1 y 3
+    randomNum = random(1,4);
     Serial.println(randomNum);
     if(randomNum == 2){
       digitalWrite(led1, HIGH);
@@ -52,7 +52,7 @@ void loop()
         digitalWrite(led2, LOW);
         digitalWrite(led3, HIGH);
     }
-  }else{
+  }else if (valorPulsador == LOW && pushed == 1){
       pushed = 0;
   }
 }

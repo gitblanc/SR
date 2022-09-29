@@ -50,6 +50,7 @@ void loop() {
         digitalWrite(ledVerde, HIGH);
         bufferLectura = ""; // reinicio del buffer
         sizeOfBuffer = 0;
+        Serial.println("Pasaron 5 segundos -> puerta CERRADA");
   }else if(teclaPulsada == 'C'&& isOpened){
         isOpened = false;
         Serial.println("Tecla pulsada: C -> puerta CERRADA");

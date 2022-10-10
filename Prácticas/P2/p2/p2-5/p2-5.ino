@@ -20,6 +20,7 @@ Keypad teclado = Keypad(makeKeymap(teclas), pinsFilas, pinsColumnas,
 nfilas, ncolumnas);
 
 bool isOpened = false;
+bool isOpenedWithPass = false;
 
 double inicioCuentaTiempo;
 
@@ -67,51 +68,64 @@ void loop() {
   char teclaPulsada = teclado.getKey();
   if(bufferLectura == password && !isOpened){
       inicioCuentaTiempo = millis();
+      isOpenedWithPass = true;
       isOpened = true;
       Serial.println("Contraseña correcta -> puerta ABIERTA");
       digitalWrite(ledVerde, LOW);
       digitalWrite(ledRojo, HIGH);
       sizeOfBuffer = 0;
-  }else if(teclaPulsada == 'C'&& isOpened){
+  }else if(!isOpenedWithPass && hayPersonasInterior() < 100 && !isOpened){
+      isOpened = true;
+      digitalWrite(ledVerde, LOW);
+      digitalWrite(ledRojo, HIGH);
+      Serial.println("Personas detectadas en el interior -> puerta ABIERTA");
+  }else if(!isOpenedWithPass && hayPersonasInterior() > 100 && isOpened){
+      isOpened = false;
+      digitalWrite(ledRojo, LOW);
+      digitalWrite(ledVerde, HIGH);
+      Serial.println("Ya no hay gente en el interior -> puerta CERRADA");
+  }else if(teclaPulsada == 'C' && isOpened && isOpenedWithPass){
         isOpened = false;
+        isOpenedWithPass = false;
         Serial.println("Tecla pulsada: C -> puerta CERRADA");
         digitalWrite(ledRojo, LOW);
         digitalWrite(ledVerde, HIGH);
         bufferLectura = ""; // reinicio del buffer
         sizeOfBuffer = 0;
-  }
-  else if (hayPersonasInterior() < 100 && hayPersonasExterior() < 10 && isOpened){
+  }else if (hayPersonasInterior() < 100 && hayPersonasExterior() < 10 && isOpened && isOpenedWithPass){
     inicioCuentaTiempo = millis();
     isOpened = true;
     Serial.println("Objeto grande detectado -> puerta ABIERTA");
     digitalWrite(ledRojo, HIGH);
     digitalWrite(ledVerde, LOW);
-  }
-  else if(millis() - inicioCuentaTiempo >= 5000 && isOpened){
-        isOpened = false;
+  }else if(isOpenedWithPass && hayPersonasExterior() < 10 && isOpened){
+    Serial.println("Hay personas en el interior -> puerta ABIERTA");
+    entroUltrasonidos = true;
+    inicioCuentaTiempo = millis();
+  }else if(entroUltrasonidos && hayPersonasInterior() < 100 && isOpened && isOpenedWithPass){
+        Serial.println("Han entrado personas del exterior al interior -> PUERTA CERRADA");
         digitalWrite(ledRojo, LOW);
         digitalWrite(ledVerde, HIGH);
-        bufferLectura = ""; // reinicio del buffer
-        sizeOfBuffer = 0;
-        Serial.println("Pasaron 5 segundos -> puerta CERRADA");
-  }else if(hayPersonasInterior() < 100 && isOpened){//Caso 3 sensor de luz
-        Serial.println("Hay personas en el interior -> PUERTA CERRADA");
-        digitalWrite(ledRojo, LOW);
-        digitalWrite(ledVerde, HIGH);
-        bufferLectura = ""; // reinicio del buffer
-        sizeOfBuffer = 0;
         if(entroUltrasonidos){
           cont+=1;
           mostrarPantalla(cont);
           entroUltrasonidos = false;
         }
         isOpened = false;
-  }else if(hayPersonasExterior() < 10 && isOpened){
-    Serial.println("Hay personas en el interior -> puerta ABIERTA");
-    entroUltrasonidos = true;
-    isOpened = false;
-    sizeOfBuffer = 0;
-  }else if(sizeOfBuffer > 3 && !isOpened){
+        bufferLectura = ""; // reinicio del buffer
+        sizeOfBuffer = 0;
+        isOpenedWithPass = false;
+  }else if(isOpenedWithPass){ 
+      if(millis() - inicioCuentaTiempo >= 5000 && isOpened){
+        isOpened = false;
+        digitalWrite(ledRojo, LOW);
+        digitalWrite(ledVerde, HIGH);
+        bufferLectura = ""; // reinicio del buffer
+        sizeOfBuffer = 0;
+        isOpenedWithPass = false;
+        Serial.println("Pasaron 5 segundos -> puerta CERRADA");
+      }
+  }else if(sizeOfBuffer > 3 && !isOpened && !isOpenedWithPass){
     bufferLectura = ""; // reinicio del buffer
     sizeOfBuffer = 0;
     for(int i = 0; i <= 3; i++){
@@ -121,10 +135,9 @@ void loop() {
       delay(1000);
     }
     digitalWrite(ledVerde, HIGH);
-  }
-  else if(isdigit(teclaPulsada) && !isOpened){
+  }else if(isdigit(teclaPulsada) && !isOpened && !isOpenedWithPass){
     bufferLectura += teclaPulsada;
-  Serial.println("buffer: "+bufferLectura);
+    Serial.println("buffer: "+bufferLectura);
     sizeOfBuffer++;
   }
 }

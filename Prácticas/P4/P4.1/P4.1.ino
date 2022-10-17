@@ -3,6 +3,8 @@
 Servo servo;
 int boton_pin = 7; // Pin digital para el botón
 int X_pin = A0; // Pin analógico para leer eje X
+bool derecha = false;
+bool izquierda = false;
 
 void setup(){
  Serial.begin(9600);
@@ -21,6 +23,14 @@ void loop(){
  } else if (movimientoJoystickX > 490 && movimientoJoystickX < 530) {
     servo.write(90);
  }
+}
+
+void girarIzquierda(){
+  servo.write(0);
+}
+
+void girarDerecha(){
+  servo.write(180);
 }
 int detectarJoystick(){
  return analogRead(X_pin);

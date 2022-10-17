@@ -36,16 +36,16 @@ module cuerpo(alto,ancho,largo, anchoagujero, radioagujero){
     //Bifurcaciones triangulares exteriores
         rotate([0,0,90])
             translate([7.4,-39.2,0])
-                cylinder (h = 40, r= 1, $fn=3);
+                cylinder (h = largo, r= 1, $fn=3);
         rotate([0,0,90])
             translate([7.4,-0.8,0])
-                cylinder (h = 40, r= 1, $fn=3);
+                cylinder (h = largo, r= 1, $fn=3);
         rotate([0,0,-90])
             translate([-12.6,39.2,0])
-                cylinder (h = 40, r= 1, $fn=3);
+                cylinder (h = largo, r= 1, $fn=3);
         rotate([0,0,-90])
             translate([-12.6,0.8,0])
-                cylinder (h = 40, r= 1, $fn=3);
+                cylinder (h = largo, r= 1, $fn=3);
         
 }
 

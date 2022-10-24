@@ -3,11 +3,13 @@
 Servo servo;
 int boton_pin = 7; // Pin digital para el botón
 int X_pin = A0; // Pin analógico para leer eje X
+int pinServo = 8; //Pin digital servo motor
 int pinChoqueIzquierda = 11;
 int pinChoqueDerecha = 4;
-int modo = 1;
+int modo = 2;
 bool izquierda;
 bool derecha;
+bool pushed;
 
 void setup(){
  Serial.begin(9600);
@@ -17,11 +19,11 @@ void setup(){
  pinMode(pinChoqueDerecha, INPUT);
 }
 void loop(){
-  cambiarModo();
   int movimientoJoystickX = detectarJoystick();
   Serial.println(movimientoJoystickX);
   Serial.println(modo);
   if(modo == 2) {
+    cambiarModo();
      if ((movimientoJoystickX > 490 && movimientoJoystickX < 530) || !digitalRead(pinChoqueDerecha) || !digitalRead(pinChoqueIzquierda)) {
         servo.write(90);
         if(!digitalRead(pinChoqueDerecha)){
@@ -46,17 +48,22 @@ void loop(){
           girarDerechaRapido();
      } 
   } else if (modo == 1){
-      if(izquierda){
-      Serial.println("Izquierda");
+    cambiarModo();
+    if(!pushed){
       girarIzquierdaRapido();
       modoAutomatico();
+      pushed = true;
+    }
+     if(izquierda && pushed){
+       Serial.println("Izquierda");
+       girarIzquierdaRapido();
+       modoAutomatico();
      } 
-     else if(derecha){
+     else if(derecha && pushed){
        Serial.println("Derecha");
        girarDerechaRapido();
        modoAutomatico();
-     } 
-     
+     }
   }
 }
 
@@ -71,9 +78,12 @@ void modoAutomatico(){
 
 void cambiarModo(){
   if(digitalRead(boton_pin) == LOW && modo == 1){
-    modo == 2;
+    modo = 2;
+    pushed = false;
+    delay(1000);
   } else if (digitalRead(boton_pin) == LOW && modo == 2) {
-    modo == 1;
+    modo = 1;
+    delay(1000);
   }
 }
 

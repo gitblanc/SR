@@ -2,10 +2,12 @@ int pythonData;
 void setup() {
   // Mismos Baudios que desde Python
   Serial.begin(9600);
-  // Espera máxima datos del puerto Serie Serial.setTimeout(1);
+  // Espera máxima datos del puerto Serie 
+  Serial.setTimeout(1);
 }
 void loop() {
-    // Esperamos en bucle hasta que tengamos datos en el puerto serie while (!Serial.available());
+    // Esperamos en bucle hasta que tengamos datos en el puerto serie 
+    while (!Serial.available());
     // Recogemos ese dato que sabemos será un entero
     pythonData = Serial.readString().toInt();
     // Hacemos lo que sea

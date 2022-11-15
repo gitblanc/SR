@@ -22,7 +22,7 @@ int contEspiral = 89;
 int pinTrig = 4;
 int pinEcho = 5;
 
-bool estaEsquivando = false;
+bool rodeandoObstaculo = false;
 
 void setup(){ 
   Serial.begin(9600); // Descomentar si queréis debuguear por consola 
@@ -40,12 +40,13 @@ void loop() {
 
 bool detectarObstaculo(){
   long distance = ultrasonidos();
-  return distance <= 20;
+  return distance <= 4;
  }
 
 void detectarLinea(){
   if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE){
     if(detectarObstaculo()){
+      rodeandoObstaculo = false;
       rodearObstaculo();
     }else{
       goForward();
@@ -61,27 +62,11 @@ void detectarLinea(){
     //contEspiral = 91;
     contEspiral = 89;
   }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE){
-    if(detectarObstaculo()){
-      rodearObstaculo();
-    }else if(estaEsquivando){
-      estaEsquivando = false;
-      recuperarLinea();
-    }else{
-      espiral();
-      sumarContador();
-    }
+      if(!rodeandoObstaculo){
+        espiral();
+        sumarContador();
+      }
   }
-}
-
-void recuperarLinea(){
-  goForward();
-  delay(2000);
-  right();
-  delay(1200);
-  goForward();
-  delay(3000);
-  right();
-  delay(1200);
 }
 
 void sumarContador(){
@@ -96,6 +81,15 @@ void goForward(){
   //servoRight.write(0);
   servoLeft.write(0);
   servoRight.write(180);
+  
+}
+
+void goForwardSlow(){
+  // Adelante
+  //servoLeft.write(180); // Velocidad Máxima 
+  //servoRight.write(0);
+  servoLeft.write(40);
+  servoRight.write(140);
   
 }
 
@@ -117,14 +111,14 @@ void stopMovement(){
 void left(){
    //servoLeft.write(90); 
    //servoRight.write(0); 
-   servoLeft.write(90); 
+   servoLeft.write(90);
    servoRight.write(180); 
 }
 
 void right(){
    //servoLeft.write(180); 
    //servoRight.write(90); 
-   servoLeft.write(0); 
+   servoLeft.write(0);
    servoRight.write(90);  
 }
 
@@ -136,13 +130,37 @@ void espiral(){
 }
 
 void rodearObstaculo(){
-  estaEsquivando = true;
-  left();
-  delay(1500);
+  bool cond1 = digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE;
+  bool cond2 = digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == NO_LINE;
+  bool cond3 = digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == LINE;
+  bool cond4 = digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE;
+  rodeandoObstaculo = true;
+  servoRight.write(180);
+  servoLeft.write(180);
+  delay(750);
   goForward();
-  delay(2000);
-  right();
+  delay(1500);
+  servoRight.write(0);
+  servoLeft.write(0);
+  delay(750);
+  goForward();
+  delay(1500);
+  servoRight.write(0);
+  servoLeft.write(0);
+  goForward();
   delay(1000);
+  servoRight.write(0);
+  servoLeft.write(0);
+  delay(750);
+  while(cond1){
+    goForwardSlow();
+    delay(200);
+  }
+  while(cond3 || cond4){
+    servoRight.write(180);
+    servoLeft.write(90);
+    delay(750);
+  }
   detectarLinea();
 }
 

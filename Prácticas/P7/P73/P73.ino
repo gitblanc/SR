@@ -139,27 +139,25 @@ void rodearObstaculo(){
   servoLeft.write(180);
   delay(750);
   goForward();
-  delay(1500);
-  servoRight.write(0);
-  servoLeft.write(0);
-  delay(750);
-  goForward();
-  delay(1500);
-  servoRight.write(0);
-  servoLeft.write(0);
-  goForward();
   delay(1000);
   servoRight.write(0);
   servoLeft.write(0);
   delay(750);
+  goForward();
+  delay(1500);
+  servoRight.write(0);
+  servoLeft.write(0);
+  delay(550);
+  goForward();
+  delay(1000);
   while(cond1){
     goForwardSlow();
-    delay(200);
   }
-  while(cond3 || cond4){
+  if(cond4){
     servoRight.write(180);
-    servoLeft.write(90);
-    delay(750);
+    servoLeft.write(180);
+    delay(400);
+    goForwardSlow();
   }
   detectarLinea();
 }

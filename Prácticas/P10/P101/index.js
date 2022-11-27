@@ -57,7 +57,6 @@ const robot4 = { lat: 43.36429, lng: -5.84776 };
 // This example displays a marker at the center of Australia.
 // When the user clicks the marker, an info window opens.
 function initMap() {
-  const uluru = { lat: -25.363, lng: 131.044 };
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 15,
     center: oviedo,

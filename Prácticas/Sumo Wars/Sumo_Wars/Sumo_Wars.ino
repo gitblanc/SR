@@ -40,9 +40,7 @@ void detectarLinea(){
   }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == LINE){
     turnAroundLeft();
   }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE){
-    while(!detectarObstaculo()){
-      turnAroundLeft();
-    }
+    goForward();
   }
 }
 

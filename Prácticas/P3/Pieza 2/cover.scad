@@ -1,13 +1,13 @@
 module placa(hc1, dc1, fnc1, des1, fnes, hc2, des2){
     difference(){
         esferaHueca(des1, fnes, hc2, des2);
-        translate([0,41.5,-2])
+        translate([0,41,-2])
         cylinder (h = hc1, d=dc1, $fn=fnc1);
-        translate([41.5,0,-2])
+        translate([41,0,-2])
         cylinder (h = hc1, d=dc1, $fn=fnc1);
-        translate([0,-41.5,-2])
+        translate([0,-41,-2])
         cylinder (h = hc1, d=dc1, $fn=fnc1);
-        translate([-41.5,0,-2])
+        translate([-41,0,-2])
         cylinder (h = hc1, d=dc1, $fn=fnc1);
     }
 } 

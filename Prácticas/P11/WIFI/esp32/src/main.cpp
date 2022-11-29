@@ -10,7 +10,7 @@ WiFiClient client;
 int ldr = 34;
 
 void connectToWifi(){
-  WiFi.begin("MOVISTAR_A22A", "Pg2a56i228y32FSQcYoV");
+  WiFi.begin("wifi", "password");
   // Espera a que se conecte la wifi
   uint32_t notConnectedCounter = 0;
   while (WiFi.status() != WL_CONNECTED) {

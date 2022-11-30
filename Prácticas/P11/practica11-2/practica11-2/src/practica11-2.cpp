@@ -16,7 +16,7 @@ unsigned long myTalkBackID = 47432;
 const char * myTalkBackKey = "MKBHKR8MYKS327NC";
 
 void connectToWifi(){
-  WiFi.begin("MOVISTAR_A22A", "Pg2a56i228y32FSQcYoV");
+  WiFi.begin("wifi", "passwd");
   // Espera a que se conecte la wifi
   uint32_t notConnectedCounter = 0;
   while (WiFi.status() != WL_CONNECTED) {

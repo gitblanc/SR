@@ -72,7 +72,7 @@ float leerHumedad(){
     <h2>D32 Web Server</h2>
     <h3>Software para Robots 2022, Eduardo Blanco Bielsa</h3>
     <p>
-      <i class="fas fa-thermometer-half" style="color:#059e8a;"></i> 
+      <i class="fas fa-thermometer-half" style="color:#FF0C00;"></i> 
       <span class="dht-labels">Temperatura</span> 
       <span id="temperatura">%TEMPERATURA%</span>
       <sup class="units">&deg;C</sup>
@@ -80,7 +80,7 @@ float leerHumedad(){
     <p>
       <i class="fas fa-tint" style="color:#00add6;"></i> 
       <span class="dht-labels">Humedad</span>
-      <span id="humidity">%HUMEDAD%</span>
+      <span id="humedad">%HUMEDAD%</span>
       <sup class="units">&percnt;</sup>
     </p>
   </body>
@@ -109,7 +109,7 @@ float leerHumedad(){
   </script>
   </html>)rawliteral";
 
-// Replaces placeholder with DHT values
+// Cogemos los valores del DHT
 String processor(const String& var){
   if(var == "TEMPERATURA"){
     return String(leerTemperatura());
@@ -127,7 +127,7 @@ void setup(){
   
   connectToWifi(); // conectamos el d32 a la wifi
 
-  // Página principal (root)
+  // Página principal a tiempo real (root)
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/html", index_html, processor);
   });

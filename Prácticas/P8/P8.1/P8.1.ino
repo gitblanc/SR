@@ -41,9 +41,9 @@ void detectarLinea(){
   else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == NO_LINE){
     left90();
   }
-  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == NO_LINE){
+  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     right();
-  }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == LINE){
+  }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     left();
   }
   else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
@@ -54,15 +54,15 @@ void detectarLinea(){
   //}
 }
 
-void left90(){
+void right90(){
    servoLeft.write(180); 
    servoRight.write(180);
    delay(750);
 }
 
-void right90(){
+void left90(){
    goForward();
-   delay(200);
+   delay(190);
    servoLeft.write(0); 
    servoRight.write(0); 
    delay(650);
@@ -72,11 +72,11 @@ void right90(){
 
 void goForward(){
   // Adelante
-  //servoLeft.write(180); // Velocidad Máxima 
-  //servoRight.write(0);
+  servoLeft.write(180); // Velocidad Máxima 
+  servoRight.write(0);
   
-  servoLeft.write(0); //Simulador
-  servoRight.write(180);  
+  //servoLeft.write(0); //Simulador
+  //servoRight.write(180);  
 }
 
 //void goBackward(){
@@ -96,17 +96,22 @@ void stopMovement(){
 }
 
 void volver(){
-   servoLeft.write(180); 
+   servoLeft.write(180);
    servoRight.write(0);
-   delay(1500);
+   delay(200);
+   servoLeft.write(180); 
+   servoRight.write(180);
+   delay(1300);
+   goForward();
+   delay(200);
 }
 
-void left(){
+void right(){
    servoLeft.write(90); 
    servoRight.write(0);   
 }
 
-void right(){
+void left(){
    servoLeft.write(180); 
    servoRight.write(90);  
 }

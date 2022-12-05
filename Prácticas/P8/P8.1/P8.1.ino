@@ -32,14 +32,8 @@ void detectarLinea(){
   if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     goForward();
   }
-  //else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && (digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == LINE)){
-  //  right90();
-  //}
-  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == LINE){
+  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == LINE && digitalRead(pinMasIzq) == NO_LINE){
     right90();
-  }
-  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == NO_LINE){
-    left90();
   }
   else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     right();
@@ -49,44 +43,84 @@ void detectarLinea(){
   else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     volver();
   }
-  //else if (digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && (digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == LINE)){
-  //  stopMovement();
-  //}
+  else if (digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == LINE){
+    checking();
+  }
+  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == NO_LINE && digitalRead(pinMasIzq) == LINE){
+    checkingLeft();
+  }
 }
 
-void right90(){
-   servoLeft.write(180); 
-   servoRight.write(180);
-   delay(750);
+void checkingLeft(){
+  goForward();
+  delay(750);
+  if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
+    goForward();
+  } else if (digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
+    goBackward();
+    delay(750);
+    left90();
+  }
+}
+
+void checking(){
+  goForward();
+  delay(90);
+  if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == LINE){
+    stopMovement();
+  } else {
+    goForward();
+    delay(660);
+    if (digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
+      goBackward();
+      delay(750);
+      right90();
+    }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
+      goBackward();
+      delay(750);
+      right90();
+    } 
+  }
+  
 }
 
 void left90(){
    goForward();
    delay(190);
+   servoLeft.write(180); 
+   servoRight.write(180); 
+   delay(750);
+   goForward();
+   delay(190);
+}
+
+void right90(){
+   goForward();
+   delay(400);
    servoLeft.write(0); 
    servoRight.write(0); 
-   delay(650);
+   delay(750);
    goForward();
-   delay(200);
+   delay(190);
 }
 
 void goForward(){
   // Adelante
-  servoLeft.write(180); // Velocidad Máxima 
-  servoRight.write(0);
+  //servoLeft.write(180); // Velocidad Máxima 
+  //servoRight.write(0);
   
-  //servoLeft.write(0); //Simulador
-  //servoRight.write(180);  
+  servoLeft.write(0); //Simulador
+  servoRight.write(180);  
 }
 
-//void goBackward(){
+void goBackward(){
   // Atrás
   //servoLeft.write(0);
   //servoRight.write(180);
 
-//  servoLeft.write(180); //Simulador
-//  servoRight.write(0);  
-//}
+  servoLeft.write(180); //Simulador
+  servoRight.write(0);  
+}
 
 void stopMovement(){
   // Detener
@@ -98,20 +132,18 @@ void stopMovement(){
 void volver(){
    servoLeft.write(180);
    servoRight.write(0);
-   delay(200);
+   delay(150);
    servoLeft.write(180); 
    servoRight.write(180);
-   delay(1300);
-   goForward();
-   delay(200);
+   delay(1500);
 }
 
-void right(){
+void left(){
    servoLeft.write(90); 
    servoRight.write(0);   
 }
 
-void left(){
+void right(){
    servoLeft.write(180); 
    servoRight.write(90);  
 }

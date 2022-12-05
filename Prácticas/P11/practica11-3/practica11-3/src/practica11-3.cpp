@@ -17,11 +17,11 @@ AsyncWebServer server(80); // creamos el servidor
 float t = 0; // temperatura
 float h = 0; // humedad
 
-String host = "http://ip_addr";//aquí ponemos la ip de nuestro pc
+String host = "http://ipv4";//aquí ponemos la ip de nuestro pc
 String php_connecter = "/connect.php";
 
 void connectToWifi(){
-  WiFi.begin("wifi", "passwd");//aquí el nombre de la red y la contraseña
+  WiFi.begin("wifi_nombre", "wifi_passwd");//aquí el nombre de la red y la contraseña
   // Espera a que se conecte la wifi
   uint32_t notConnectedCounter = 0;
   while (WiFi.status() != WL_CONNECTED) {

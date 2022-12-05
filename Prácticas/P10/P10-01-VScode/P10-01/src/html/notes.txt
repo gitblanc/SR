@@ -1,0 +1,10 @@
+const oviedo = { lat: 43.36029, lng:  -5.84476 };
+const locations = [
+  { lat: 43.36029, lng:  -5.84476 },
+  { lat: 43.36029, lng:  -5.84576 },
+  { lat: 43.36029, lng:  -5.84676 },
+  { lat: 43.36029, lng:  -5.84776 },
+  { lat: 43.36029, lng:  -5.84876 },
+];
+
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"

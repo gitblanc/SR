@@ -49,38 +49,38 @@ void detectarLinea(){
   else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     volver();
   }
-  //else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == NO_LINE && digitalRead(pinMasIzq) == LINE){
-  //  Serial.println("ChechingLeft");
-  //  checkingLeft();
-  //}
+  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == NO_LINE && digitalRead(pinMasIzq) == LINE){
+    Serial.println("ChechingLeft");
+    checkingLeft();
+  }
 }
 
 void checkingLeft(){
   goForward();
-  delay(750);
+  delay(400);
   if (digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     Serial.println("left");
     goBackward();
-    delay(750);
-    left90();
+    delay(200);
+    left90NF();
   }
 
 }
 
 void checking(){
   goForward();
-  delay(750);
+  delay(400);
   Serial.println("CHECKING");
   if (digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
       Serial.println("1");
       goBackward();
-      delay(750);
-      right90();
+      delay(200);
+      right90NF();
   }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     Serial.println("2");
     goBackward();
-    delay(750);
-    right90();
+    delay(200);
+    right90NF();
   } 
   else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == LINE){
     Serial.println("STOP");
@@ -90,22 +90,38 @@ void checking(){
  
 }
 
-void left90(){
-   goForward();
-   delay(190);
+void left90NF(){
    servoLeft.write(180); 
    servoRight.write(180); 
-   delay(750);
+   delay(600);
+   goForward();
+   delay(190);
+}
+
+void right90NF(){
+   servoLeft.write(0); 
+   servoRight.write(0); 
+   delay(600);
+   goForward();
+   delay(190);
+}
+
+void left90(){
+   goForward();
+   delay(200);
+   servoLeft.write(180); 
+   servoRight.write(180); 
+   delay(600);
    goForward();
    delay(190);
 }
 
 void right90(){
    goForward();
-   delay(400);
+   delay(200);
    servoLeft.write(0); 
    servoRight.write(0); 
-   delay(800);
+   delay(600);
    goForward();
    delay(190);
 }
@@ -141,7 +157,7 @@ void volver(){
    delay(150);
    servoLeft.write(180); 
    servoRight.write(180);
-   delay(1500);
+   delay(1200);
 }
 
 void left(){
@@ -153,3 +169,4 @@ void right(){
    servoLeft.write(180); 
    servoRight.write(90);  
 }
+

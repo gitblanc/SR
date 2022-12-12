@@ -21,6 +21,8 @@ void setup(){
   Serial.begin(9600); // Descomentar si queréis debuguear por consola 
   pinMode(pinIrDer, INPUT);
   pinMode(pinIrIzq, INPUT);
+  pinMode(pinMasIzq, INPUT);
+  pinMode(pinMasDer, INPUT);
   servoLeft.attach(pinServoLeft); 
   servoRight.attach(pinServoRight);
 }
@@ -31,6 +33,10 @@ void loop() {
 void detectarLinea(){
   if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     goForward();
+  }
+  else if (digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == LINE){
+    Serial.println("CheckingNormal");
+    checking();
   }
   else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == LINE && digitalRead(pinMasIzq) == NO_LINE){
     right90();
@@ -43,45 +49,45 @@ void detectarLinea(){
   else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     volver();
   }
-  else if (digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == LINE){
-    checking();
-  }
-  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == NO_LINE && digitalRead(pinMasIzq) == LINE){
-    checkingLeft();
-  }
+  //else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == NO_LINE && digitalRead(pinMasIzq) == LINE){
+  //  Serial.println("ChechingLeft");
+  //  checkingLeft();
+  //}
 }
 
 void checkingLeft(){
   goForward();
   delay(750);
-  if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
-    goForward();
-  } else if (digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
+  if (digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
+    Serial.println("left");
     goBackward();
     delay(750);
     left90();
   }
+
 }
 
 void checking(){
   goForward();
-  delay(90);
-  if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == LINE){
+  delay(750);
+  Serial.println("CHECKING");
+  if (digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
+      Serial.println("1");
+      goBackward();
+      delay(750);
+      right90();
+  }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
+    Serial.println("2");
+    goBackward();
+    delay(750);
+    right90();
+  } 
+  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == LINE && digitalRead(pinMasDer) == LINE){
+    Serial.println("STOP");
     stopMovement();
-  } else {
-    goForward();
-    delay(660);
-    if (digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
-      goBackward();
-      delay(750);
-      right90();
-    }else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
-      goBackward();
-      delay(750);
-      right90();
-    } 
-  }
-  
+    exit(0);
+  } 
+ 
 }
 
 void left90(){
@@ -99,7 +105,7 @@ void right90(){
    delay(400);
    servoLeft.write(0); 
    servoRight.write(0); 
-   delay(750);
+   delay(800);
    goForward();
    delay(190);
 }

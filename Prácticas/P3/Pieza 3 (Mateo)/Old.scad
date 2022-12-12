@@ -11,7 +11,7 @@ difference(){
     for(i = [7:12:50]){
         for(j = [7:14:70]){
             translate([i,j,-1])
-                cylinder(r=2, h=20);
+                cylinder(r=2, h=20, $fn=20);
         }
     }
     //Center Cube
@@ -35,13 +35,13 @@ for(w = [57.5,57,13]){
     rotate([0,90,0])
     translate ([-5,w,-5]){
         difference (){
-            cylinder (h=5, r=wheelRadius); //Wheel
+            cylinder (h=5, r=wheelRadius, $fn=40); //Wheel
            
             translate([0, 0, -1]) {
                 cylinder (h=0, r=0);
                 make_ring_of (radius = wHolesRadius, count = wHolesCount)
                     cylinder (r = lGapRadius, h = 10, $fn=20); //Wheel Little Gaps
-                cylinder(h = 5, r = iGapRadius);//Inside Gap
+                cylinder(h = 5, r = iGapRadius, $fn=20);//Inside Gap
             }
             
         }
@@ -58,12 +58,12 @@ for(w = [-57.5,-13]){
     rotate([0,90,180])
     translate ([-5,w,-55]){
         difference (){
-            cylinder (h=5, r=wheelRadius); //Wheel
+            cylinder (h=5, r=wheelRadius, $fn=40); //Wheel
             translate([0, 0, -1]) {
                 cylinder (h=0, r=0);
                 make_ring_of (radius = wHolesRadius, count = wHolesCount)
                     cylinder (r = lGapRadius, h = 10, $fn=20);//Wheel Little Gaps
-                cylinder(h = 5, r = iGapRadius);//Inside Gap
+                cylinder(h = 5, r = iGapRadius, $fn=20);//Inside Gap
             }
             
         }
@@ -72,7 +72,7 @@ for(w = [-57.5,-13]){
     //Wheel Bar
     rotate([0,90,180])
     translate([-5, w, -54])
-    cylinder(h = 2, r=2);
+    cylinder(h = 2, r=2, $fn=20);
 }
 
 module make_ring_of (radius, count)

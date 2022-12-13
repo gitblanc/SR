@@ -6,6 +6,5 @@ En este caso se nos presentó un problema de cara a la solución del laberinto c
 
 Estos fallos parecen ser debidos principalmente a situaciones aleatorias concretas de un intento u otros factores externos ya que al probar este mismo código en el simulador de arduino, donde las condiciones del ambiente son las óptimas el robot móvil conseguía llegar de manera correcta a la solución del circuito casi en el 100% de las ocasiones.
 
-```
-Adjuntamos en este apartado tanto el código usado en el simulador como el usado en el robot móvil físico ya que los delays varían en cierta medida. Además de esto también aportamos videos grabados en clase del robot físico y vídeos grabados del propio simulador
-```
+
+>Adjuntamos en este apartado tanto el código usado en el simulador como el usado en el robot móvil físico ya que los delays varían en cierta medida. Además de esto también aportamos videos grabados en clase del robot físico y vídeos grabados del propio simulador

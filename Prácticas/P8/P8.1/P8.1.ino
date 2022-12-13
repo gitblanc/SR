@@ -54,10 +54,10 @@ void detectarLinea(){
   else if(digitalRead(pinIrIzq) == NO_LINE && digitalRead(pinIrDer) == NO_LINE && digitalRead(pinMasIzq) == NO_LINE && digitalRead(pinMasDer) == NO_LINE){
     volver();
   }
-  //else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == NO_LINE && digitalRead(pinMasIzq) == LINE){
-  //  Serial.println("ChechingLeft");
-  //  checkingLeft();
-  //}
+  else if(digitalRead(pinIrIzq) == LINE && digitalRead(pinIrDer) == LINE && digitalRead(pinMasDer) == NO_LINE && digitalRead(pinMasIzq) == LINE){
+    Serial.println("ChechingLeft");
+    checkingLeft();
+  }
 }
 
 void checkingLeft(){

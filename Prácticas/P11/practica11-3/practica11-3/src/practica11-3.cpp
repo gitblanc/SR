@@ -1,3 +1,5 @@
+// Hecho por Eduardo Blanco Bielsa, del grupo B3
+// Github: @gitblanc
 #include <Arduino.h>
 #include <Adafruit_Sensor.h>
 #include "WiFi.h"

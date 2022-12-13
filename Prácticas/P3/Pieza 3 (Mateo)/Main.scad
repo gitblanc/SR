@@ -1,3 +1,7 @@
+// C++ code
+// GRUPO B3
+// Mateo Rico Iglesias
+
 use <Wheels.scad>
 use <Box.scad>
 //Variables for Wheels

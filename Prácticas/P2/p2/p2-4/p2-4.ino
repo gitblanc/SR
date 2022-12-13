@@ -1,3 +1,9 @@
+// C++ code
+// GRUPO B3
+// Mateo Rico Iglesias
+// Chen Xin Pan Wang
+// Eduardo Blanco Bielsa
+
 #include <Keypad.h>
 //Leds
 int ledRojo = 2;

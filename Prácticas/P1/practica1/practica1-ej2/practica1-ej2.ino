@@ -1,3 +1,9 @@
+// C++ code
+// GRUPO B3
+// Mateo Rico Iglesias
+// Chen Xin Pan Wang
+// Eduardo Blanco Bielsa
+
 //PINES LED
 int red = 2;
 int green = 3;

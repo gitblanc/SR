@@ -1,3 +1,9 @@
+// C++ code
+// GRUPO B3
+// Mateo Rico Iglesias
+// Chen Xin Pan Wang
+// Eduardo Blanco Bielsa
+
 //LEDS
 int ledA = 4;
 int ledB = 3;

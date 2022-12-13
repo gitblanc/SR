@@ -1,3 +1,8 @@
+// C++ code
+// GRUPO B3
+// Mateo Rico Iglesias
+// Chen Xin Pan Wang
+// Eduardo Blanco Bielsa
 #include <Arduino.h>
 #include "WiFi.h"
 #include "Thingspeak.h"

@@ -98,17 +98,19 @@ void checking(){
 void left90NF(){
    servoLeft.write(180); 
    servoRight.write(180); 
-   delay(600);
+   delay(550);
    goForward();
-   delay(190);
+   delay(50);
 }
 
 void right90NF(){
+   goForward();
+   delay(20);
    servoLeft.write(0); 
    servoRight.write(0); 
-   delay(600);
+   delay(550);
    goForward();
-   delay(190);
+   delay(50);
 }
 
 void left90(){
@@ -116,9 +118,9 @@ void left90(){
    delay(200);
    servoLeft.write(180); 
    servoRight.write(180); 
-   delay(600);
+   delay(550);
    goForward();
-   delay(190);
+   delay(50);
 }
 
 void right90(){
@@ -126,9 +128,9 @@ void right90(){
    delay(200);
    servoLeft.write(0); 
    servoRight.write(0); 
-   delay(600);
+   delay(550);
    goForward();
-   delay(190);
+   delay(50);
 }
 
 void goForward(){
@@ -162,7 +164,7 @@ void volver(){
    delay(150);
    servoLeft.write(180); 
    servoRight.write(180);
-   delay(1200);
+   delay(1100);
 }
 
 void left(){

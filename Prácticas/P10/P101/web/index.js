@@ -1,6 +1,7 @@
 //We will use https://www.mappity.org for free markers images 
 const image = "./img/Microchip_2.png";
 const imagebug = "./img/Bug_2.png";
+const ip_direccion = "192.168.61.203";
 
 //State of the robot (works or not)
 var state3 = false;
@@ -47,6 +48,7 @@ const descrip4 = '<div id="content">' +
     "</div>" +
     "</div>";
 
+
 // The location of Oviedo
 const oviedo = { lat: 43.36029, lng: -5.84476 };
 //Robots coordinates
@@ -54,6 +56,16 @@ const robot1 = { lat: 43.36029, lng: -5.84476 };
 const robot2 = { lat: 43.36129, lng: -5.84576 };
 const robot3 = { lat: 43.36329, lng: -5.84376 };
 const robot4 = { lat: 43.36429, lng: -5.84776 };
+
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
 // This example displays a marker at the center of Australia.
 // When the user clicks the marker, an info window opens.
 function initMap() {
@@ -78,6 +90,8 @@ function initMap() {
     content: descrip4,
     ariaLabel: "Robot 4",
   });
+
+
   const marker1 = new google.maps.Marker({
     position: robot1,
     map,

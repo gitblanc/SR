@@ -16,7 +16,7 @@ circleSmooth = 40;
 boxGapWidth = 54;
 boxWidth = 50;
 boxLarge = 70;
-boxHeight = 10;
+boxHeight = 11;
 centerGapPosition = 31;
 
 //Left Wheels

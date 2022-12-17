@@ -1,0 +1,1 @@
+import_stl("main.stl", convexity = 5);

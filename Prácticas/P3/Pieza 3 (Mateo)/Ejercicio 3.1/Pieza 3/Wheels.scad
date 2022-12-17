@@ -19,7 +19,7 @@ module Wheels(wheelRadius, wHolesRadius, wHolesCount, lGapRadius, iGapRadius, ci
         //Wheel Bar
         rotate([0,90,0])
         translate([-5, w, -4])
-        cylinder(h = 2, r=2, $fn=circleSmooth);
+        cylinder(h = 30, r=2, $fn=circleSmooth);
     }
 }
 

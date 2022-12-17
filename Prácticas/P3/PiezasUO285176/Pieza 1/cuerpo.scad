@@ -1,3 +1,4 @@
+// Eduardo Blanco Bielsa - UO285176
 module cuerpo(alto,ancho,largo, anchoagujero, radioagujero, offsetAgujero, offsetTriangulos, radioTriangulos){
     difference(){
         cube([alto,ancho,largo]);

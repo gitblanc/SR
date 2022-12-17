@@ -1,3 +1,4 @@
+// Eduardo Blanco Bielsa - UO285176
 module placa(){
     difference(){
         cube([100,80,3]);

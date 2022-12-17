@@ -1,3 +1,4 @@
+// Eduardo Blanco Bielsa - UO285176
 module rueda(radioRueda,ancho,radioInterno, anchoInterno, radioPalier, anchoPalier, radioagujero, anchoagujero, offsetAgujero){ 
     difference(){
         union(){

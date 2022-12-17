@@ -1,3 +1,4 @@
+// Eduardo Blanco Bielsa - UO285176
 module placa(hc1, dc1, fnc1, des1, fnes, hc2, des2){
     difference(){
         esferaHueca(des1, fnes, hc2, des2);

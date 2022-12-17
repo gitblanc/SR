@@ -1,3 +1,4 @@
+// Eduardo Blanco Bielsa - UO285176
 module cubierta1(h, dg, dp, fn){
     difference(){
         cylinder (h = h, d=dg, $fn=fn);

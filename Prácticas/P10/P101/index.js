@@ -12,8 +12,7 @@ const descrip1 = '<div id="content">' +
     '<h1 id="firstHeading" class="firstHeading">Robot 1</h1>' +
     '<div id="bodyContent">' +
     "<p><b>Funciona</b>, 23 ºC <b>Calle Foncalada</b></p>" +
-    '<p>Attribution: Robot 1, <a href="https://es.wikipedia.org/wiki/Oviedo">' +
-    "https://en.wikipedia.org/w/index.php?title=Oviedo</a></p>" +
+    "<p>" +  $.getJSON('http://192.168.62.187/index?datos')+ "</p>" +
     "</div>" +
     "</div>";
 const descrip2 = '<div id="content">' +
@@ -54,6 +53,21 @@ const robot1 = { lat: 43.36029, lng: -5.84476 };
 const robot2 = { lat: 43.36129, lng: -5.84576 };
 const robot3 = { lat: 43.36329, lng: -5.84376 };
 const robot4 = { lat: 43.36429, lng: -5.84776 };
+
+function mostrarDatos(temperature, humidity) {
+  return [
+      'Escuela Ingeniería informática',
+      'Oviedo, Asturias',
+      'Latitud: " + coordenadas.lat',
+      'Longitud: ' + coordenadas.lng,
+      'Temperatura: ' + temperature,
+      'Humedad: ' + humidity,
+      '<button onclick="encenderLed()">Encender</button>',
+      '<button onclick="apagarLed()">Apagar</button>'
+    ].join("<br>");
+}
+
+
 // This example displays a marker at the center of Australia.
 // When the user clicks the marker, an info window opens.
 function initMap() {
@@ -62,7 +76,7 @@ function initMap() {
     center: oviedo,
   });
     
-  const infowindow1 = new google.maps.InfoWindow({
+  const infowindow1 = new google.maps.InfoWindow({//Este es el robot real
     content: descrip1,
     ariaLabel: "Robot 1",
   });

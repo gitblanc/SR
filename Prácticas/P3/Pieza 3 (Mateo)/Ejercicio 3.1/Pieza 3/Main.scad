@@ -1,6 +1,6 @@
-// C++ code
+// Pieza 3 code
 // GRUPO B3
-// Mateo Rico Iglesias
+// Mateo Rico Iglesias - UO277172
 
 use <Wheels.scad>
 use <Box.scad>

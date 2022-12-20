@@ -1,3 +1,6 @@
+// Pieza 3 code
+// GRUPO B3
+// Mateo Rico Iglesias - UO277172
 module Wheels(wheelRadius, wHolesRadius, wHolesCount, lGapRadius, iGapRadius, circleSmooth){
     //Wheels
     for(w = [57.5,57,13]){

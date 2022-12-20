@@ -1,4 +1,6 @@
-
+// Pieza 3 code
+// GRUPO B3
+// Mateo Rico Iglesias - UO277172
 module Box(boxGapWidth, boxWidth, boxLarge, boxHeight, centerGapPosition){
     difference(){
         //Main Box
